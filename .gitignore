@@ -1,0 +1,14 @@
+# Python 虚拟环境
+venv/
+__pycache__/
+*.pyc
+
+# 测试报告
+reports/
+
+# 环境配置
+.env
+
+# IDE 配置
+.vscode/
+.idea/

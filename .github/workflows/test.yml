@@ -1,0 +1,42 @@
+name: API Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v3
+
+      - name: 安装 Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: 安装依赖
+        run: |
+          pip install -r requirements.txt
+
+      - name: 启动被测系统
+        run: |
+          uvicorn app.main:app --host 0.0.0.0 --port 8000 &
+
+      - name: 等待服务启动
+        run: |
+          sleep 3
+
+      - name: 运行测试
+        run: |
+          pytest -v --html=reports/report.html --self-contained-html
+
+      - name: 上传测试报告
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: reports/

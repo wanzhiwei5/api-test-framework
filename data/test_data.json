@@ -1,0 +1,24 @@
+{
+    "valid_notes": [
+        {
+            "title": "学习计划",
+            "content": "1. 完成接口测试框架\n2. 学习 pytest 高级用法\n3. 提交简历项目"
+        },
+        {
+            "title": "购物清单",
+            "content": "牛奶、面包、鸡蛋、水果"
+        }
+    ],
+    "invalid_notes": [
+        {
+            "title": "",
+            "content": "标题为空",
+            "expected_status": 422
+        },
+        {
+            "title": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "content": "标题超长",
+            "expected_status": 422
+        }
+    ]
+}
