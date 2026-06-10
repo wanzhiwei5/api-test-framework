@@ -10,18 +10,7 @@
 
 本项目是一个完整的 API 自动化测试框架，对一套**笔记管理系统（REST API）**进行了全面的接口测试覆盖。
 
-### 你能从这个项目学到什么
 
-| 技能 | 说明 |
-|------|------|
-| 🐍 Python 测试开发 | 用 pytest 写自动化测试用例 |
-| 🔗 HTTP 接口测试 | 覆盖 GET / POST / PUT / DELETE |
-| 📊 数据驱动测试 | 测试数据与代码分离，JSON 参数化 |
-| ⚙️ 框架设计 | 配置管理 / 日志系统 / 客户端封装 |
-| 🤖 CI/CD | GitHub Actions 自动运行测试 |
-| 📈 测试报告 | 生成 HTML 可视化报告 |
-
----
 
 ## 🏗️ 项目架构
 
@@ -177,58 +166,7 @@ pytest -v --html=reports/report.html --self-contained-html
 
 你可以在 [Actions 页面](https://github.com/wanzhiwei5/api-test-framework/actions) 查看每次运行结果。
 
----
 
-## 📁 核心代码解读
-
-### 配置管理（core/config.py）
-
-```python
-class TestConfig(BaseSettings):
-    base_url: str = "http://localhost:8000"   # API 地址
-    timeout: int = 10                           # 超时时间
-```
-
-**为什么这样做？** 将可变配置集中管理。环境切换（本地 → 测试服务器）只需修改一处。
-
-### HTTP 客户端（core/client.py）
-
-```python
-class APIClient:
-    def get(self, path): ...
-    def post(self, path, json): ...
-    def put(self, path, json): ...
-    def delete(self, path): ...
-```
-
-**为什么这样做？** 统一封装请求/响应/日志，测试代码只需关注业务逻辑。
-
-### 数据驱动测试（tests/test_notes.py）
-
-```python
-@pytest.mark.parametrize("note_data", test_data["valid_notes"])
-def test_create_note_success(self, client, note_data):
-    ...
-```
-
-**为什么这样做？** 测试数据与代码分离，新增测试数据只需编辑 JSON 文件。
-
----
-
-## 📈 简历怎么写
-
-> **项目：API 接口自动化测试框架**
->
-> 基于 **Python + pytest + requests** 搭建完整的接口自动化测试体系。
->
-> - **框架设计**：封装配置管理、HTTP 客户端、日志系统三层架构
-> - **测试覆盖**：6 个 CRUD 接口，12 条测试用例，含正常及异常场景
-> - **数据驱动**：JSON 参数化，测试数据与代码分离，易维护
-> - **CI/CD**：GitHub Actions 自动运行测试，每次提交自动验证
->
-> 🔗 https://github.com/wanzhiwei5/api-test-framework
-
----
 
 ## 📝 后续扩展方向
 
